@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 document.getElementById("result").innerHTML = operator; 
             } else if (e.target.innerHTML == "Sqr") {
-                document.getElementById("result").innerHTML = 0;
-                    document.getElementById("story").innerHTML += Math.sqrt(firstNum) + "<br>";
+                document.getElementById("story").innerHTML += Math.sqrt(firstNum) + "<br>";
+                clear();
             } else if (e.target.innerHTML == "Reverse") {
                 if (operator == "") {
                     if (firstNum < 0) {
@@ -49,24 +49,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (operator == "/" && secondNum == 0) {
                     document.getElementById("result").innerHTML = "<p class='fs-2'>Math error: Dividir entre 0</p>"; 
                 } else {
-                    document.getElementById("result").innerHTML = 0;
                     document.getElementById("story").innerHTML += calculate(firstNum, operator, secondNum) + "<br>";
+                    clear();
                 }
-                
-                firstNum = 0;
-                secondNum = 0;
-                operator = "";
             } else {
-                document.getElementById("result").innerHTML = 0;
-                firstNum = 0;
-                secondNum = 0;
-                operator = "";
+                clear();
             }
         }
     });
 });
 
 function calculate(firstNums, operators, secondNums) {
+    let res;
     switch(operators) {
         case "+":
             res = firstNums + secondNums;
@@ -79,11 +73,23 @@ function calculate(firstNums, operators, secondNums) {
             break;
         case "/":
             res = firstNums / secondNums;
+            break;
         case "^":
             res = Math.pow(firstNums, secondNums);
+            break;
+        default:
+            res = 0;
     }
     return res;
 }
 function clearStory() {
     document.getElementById("story").innerHTML = "";
+}
+
+function clear() {
+    document.getElementById("result").innerHTML = 0;
+
+    firstNum = 0;
+    secondNum = 0;
+    operator = "";
 }
